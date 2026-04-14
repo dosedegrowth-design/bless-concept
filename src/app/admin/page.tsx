@@ -147,18 +147,30 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // List all existing files in the bucket
     async function loadExisting() {
       const urls: Record<string, string> = {};
+      const dirCache: Record<string, string[]> = {};
+      const ts = Date.now();
 
+      // Get unique directories
+      const dirs = [...new Set(SLOTS.map((s) => s.path.split("/").slice(0, -1).join("/")))];
+
+      // List each directory once
+      await Promise.all(
+        dirs.map(async (dir) => {
+          const { data } = await supabase.storage.from(BUCKET).list(dir, { limit: 100 });
+          dirCache[dir] = data?.map((f) => f.name) || [];
+        })
+      );
+
+      // Check which slots have files
       for (const slot of SLOTS) {
         const dir = slot.path.split("/").slice(0, -1).join("/");
         const fileName = slot.path.split("/").pop()!;
 
-        const { data } = await supabase.storage.from(BUCKET).list(dir);
-        if (data?.some((f) => f.name === fileName)) {
+        if (dirCache[dir]?.includes(fileName)) {
           const { data: urlData } = supabase.storage.from(BUCKET).getPublicUrl(slot.path);
-          urls[slot.id] = urlData.publicUrl + "?t=" + Date.now();
+          urls[slot.id] = urlData.publicUrl + "?t=" + ts;
         }
       }
 
