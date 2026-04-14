@@ -1,17 +1,37 @@
 "use client";
 
+import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { getWhatsAppLink } from "@/lib/constants";
 import { img } from "@/lib/supabase";
 
 export function Hero() {
+  const [videoError, setVideoError] = useState(false);
+  const videoUrl = img("images/hero/hero-video.mp4");
+  const imageUrl = img("images/hero/hero-bg.webp");
+
   return (
     <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
-      {/* Background */}
+      {/* Background Image (fallback / poster) */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${img("images/hero/hero-bg.webp")})` }}
+        style={{ backgroundImage: `url(${imageUrl})` }}
       />
+
+      {/* Background Video */}
+      {!videoError && (
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          onError={() => setVideoError(true)}
+        >
+          <source src={videoUrl} type="video/mp4" />
+        </video>
+      )}
+
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/80" />
 
       {/* Content */}

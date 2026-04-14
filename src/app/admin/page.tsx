@@ -75,6 +75,11 @@ function Slot({ slot, existingUrl }: { slot: ImageSlot; existingUrl: string | nu
   const [url, setUrl] = useState<string | null>(existingUrl);
   const [error, setError] = useState(false);
 
+  // Sync when parent finishes loading existing URLs
+  useEffect(() => {
+    if (existingUrl) setUrl(existingUrl);
+  }, [existingUrl]);
+
   async function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -126,8 +131,20 @@ function Slot({ slot, existingUrl }: { slot: ImageSlot; existingUrl: string | nu
             <p className="font-body text-[11px] text-gold">Enviando...</p>
           </div>
         ) : saved && url ? (
-          /* eslint-disable-next-line @next/next/no-img-element */
-          <img src={url} alt="" className="w-full h-24 object-cover rounded" />
+          slot.type === "video" ? (
+            <div className="relative">
+              <video src={url} className="w-full h-24 object-cover rounded" muted playsInline />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Film size={20} className="text-white/80 drop-shadow" />
+              </div>
+              <div className="absolute bottom-1 left-1">
+                <span className="font-body text-[9px] bg-black/60 text-green-400 px-1.5 py-0.5 rounded">Vídeo salvo</span>
+              </div>
+            </div>
+          ) : (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img src={url} alt="" className="w-full h-24 object-cover rounded" />
+          )
         ) : (
           <div className="py-5">
             <Upload size={18} className={`mx-auto mb-1 ${error ? "text-red-400" : "text-text-muted"}`} />

@@ -9,14 +9,14 @@
   --gold-dark: #A68B5B;
 
   /* Neutras Escuras */
-  --black: #000000;
+  --black: #080300;
   --charcoal: #141210;
   --graphite: #222018;
   --slate: #3D3D3D;
 
   /* Neutras Claras */
   --white: #FCFCFC;
-  --cream: #FCF8F4;
+  --cream: #F5F0E8;
   --pearl: #E8E2D8;
 
   /* Acentos */
@@ -48,8 +48,8 @@
   --color-text-light: var(--text-light);
   --color-text-muted: var(--text-muted);
   --color-whatsapp: var(--whatsapp);
-  --font-display: var(--font-kalnia);
-  --font-body: var(--font-pontano);
+  --font-display: var(--font-syne);
+  --font-body: var(--font-inter);
 }
 
 /* ===== BASE STYLES ===== */
@@ -62,7 +62,7 @@ html {
 body {
   background-color: var(--black);
   color: var(--white);
-  font-family: var(--font-pontano), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   overflow-x: hidden;
 }
 
