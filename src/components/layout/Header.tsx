@@ -23,7 +23,7 @@ export function Header() {
       >
         <Container className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a href="#" className="flex items-center group">
+          <a href="/" className="flex items-center group">
             <span className="font-display text-xl md:text-2xl font-medium text-white group-hover:text-gold-light transition-colors">
               Espaço Bless<br />
               <span className="text-sm font-normal text-text-light">Concept</span>

@@ -21,8 +21,8 @@ export function getWhatsAppServiceLink(serviceName: string): string {
 
 export const NAV_ITEMS: NavItem[] = [
   { label: "Serviços", href: "/servicos" },
+  { label: "Noivas", href: "/noivas" },
   { label: "Sobre", href: "/#sobre" },
-  { label: "Equipe", href: "/#equipe" },
   { label: "Espaço", href: "/#espaco" },
   { label: "Contato", href: "/#contato" },
 ];

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { MessageCircle } from "lucide-react";
 import { Container } from "./Container";
 import { NAV_ITEMS, SERVICES, BUSINESS_INFO, getWhatsAppLink } from "@/lib/constants";
@@ -64,11 +65,16 @@ export function Footer() {
             <ul className="space-y-3">
               {SERVICES.map((service) => (
                 <li key={service.id}>
-                  <a href="#servicos" className="font-body text-sm text-text-light hover:text-white transition-colors">
+                  <Link href={`/servicos/${service.slug}`} className="font-body text-sm text-text-light hover:text-white transition-colors">
                     {service.title}
-                  </a>
+                  </Link>
                 </li>
               ))}
+              <li>
+                <Link href="/noivas" className="font-body text-sm text-gold-light hover:text-gold transition-colors">
+                  Experiência Noivas
+                </Link>
+              </li>
             </ul>
           </div>
 
