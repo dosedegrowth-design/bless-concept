@@ -1,46 +1,34 @@
 import { NextResponse } from "next/server";
+import { supabase, BUCKET, getPublicUrl } from "@/lib/supabase";
 
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN!;
-const REPO_OWNER = "dosedegrowth-design";
-const REPO_NAME = "bless-concept";
-const BRANCH = "main";
-
-async function listFiles(dirPath: string): Promise<Record<string, string>> {
-  const apiUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${dirPath}?ref=${BRANCH}`;
-  const res = await fetch(apiUrl, {
-    headers: {
-      Authorization: `Bearer ${GITHUB_TOKEN}`,
-      Accept: "application/vnd.github.v3+json",
-    },
-    next: { revalidate: 30 },
+async function listAllFiles(prefix: string = ""): Promise<Record<string, string>> {
+  const { data, error } = await supabase.storage.from(BUCKET).list(prefix, {
+    limit: 200,
   });
 
-  if (!res.ok) return {};
+  if (error || !data) return {};
 
-  const items = await res.json();
-  const files: Record<string, string> = {};
+  const result: Record<string, string> = {};
 
-  for (const item of items) {
-    if (item.type === "file") {
-      // Map: "images/hero/hero-bg.webp" -> download_url
-      const key = item.path.replace("public/", "");
-      files[key] = item.download_url;
-    } else if (item.type === "dir") {
-      const subFiles = await listFiles(item.path);
-      Object.assign(files, subFiles);
+  for (const item of data) {
+    const fullPath = prefix ? `${prefix}/${item.name}` : item.name;
+
+    if (item.id) {
+      // It's a file
+      result[fullPath] = getPublicUrl(fullPath);
+    } else {
+      // It's a folder — recurse
+      const subFiles = await listAllFiles(fullPath);
+      Object.assign(result, subFiles);
     }
   }
 
-  return files;
+  return result;
 }
 
 export async function GET() {
-  if (!GITHUB_TOKEN) {
-    return NextResponse.json({});
-  }
-
   try {
-    const images = await listFiles("public/images");
+    const images = await listAllFiles("images");
     return NextResponse.json(images);
   } catch {
     return NextResponse.json({});
