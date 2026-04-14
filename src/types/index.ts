@@ -5,6 +5,9 @@ export interface Service {
   image: string;
   slug: string;
   featured?: boolean;
+  longDescription?: string;
+  highlights?: string[];
+  gallery?: string[];
 }
 
 export interface TeamMember {

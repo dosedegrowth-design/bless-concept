@@ -15,12 +15,16 @@ export function getWhatsAppLink(context: keyof typeof WHATSAPP_MESSAGES): string
   return `${WHATSAPP_BASE_URL}?text=${encodeURIComponent(WHATSAPP_MESSAGES[context])}`;
 }
 
+export function getWhatsAppServiceLink(serviceName: string): string {
+  return `${WHATSAPP_BASE_URL}?text=${encodeURIComponent(`Olá! Tenho interesse no serviço de ${serviceName} no Espaço Bless Concept.`)}`;
+}
+
 export const NAV_ITEMS: NavItem[] = [
-  { label: "Serviços", href: "#servicos" },
-  { label: "Sobre", href: "#sobre" },
-  { label: "Equipe", href: "#equipe" },
-  { label: "Espaço", href: "#espaco" },
-  { label: "Contato", href: "#contato" },
+  { label: "Serviços", href: "/#servicos" },
+  { label: "Sobre", href: "/#sobre" },
+  { label: "Equipe", href: "/#equipe" },
+  { label: "Espaço", href: "/#espaco" },
+  { label: "Contato", href: "/#contato" },
 ];
 
 export const SERVICES: Service[] = [
@@ -30,6 +34,21 @@ export const SERVICES: Service[] = [
     description: "Corte, coloração, mechas, tratamentos capilares e reconstrução com produtos premium.",
     image: "/images/services/cabelos.webp",
     slug: "beleza-cabelos",
+    longDescription: "No Espaço Bless Concept, seus cabelos recebem um tratamento completo com as melhores técnicas e produtos do mercado. Desde cortes modernos até colorações personalizadas, cada serviço é realizado por profissionais especializados que entendem a individualidade de cada fio.",
+    highlights: [
+      "Corte feminino e masculino",
+      "Coloração e retoque de raiz",
+      "Mechas, luzes e balayage",
+      "Tratamento de reconstrução capilar",
+      "Hidratação profunda",
+      "Escova progressiva e definitiva",
+      "Penteados para eventos",
+    ],
+    gallery: [
+      "/images/services/cabelos-01.webp",
+      "/images/services/cabelos-02.webp",
+      "/images/services/cabelos-03.webp",
+    ],
   },
   {
     id: "depilacao",
@@ -37,6 +56,19 @@ export const SERVICES: Service[] = [
     description: "Depilação com cera, linha e técnicas avançadas para pele sensível.",
     image: "/images/services/depilacao.webp",
     slug: "depilacao",
+    longDescription: "Oferecemos depilação com técnicas que priorizam o conforto e a saúde da pele. Nossos profissionais são treinados nas melhores práticas para garantir resultados duradouros com o mínimo de desconforto.",
+    highlights: [
+      "Depilação com cera quente e fria",
+      "Depilação com linha (threading)",
+      "Buço, axila e virilha",
+      "Pernas completa e meia perna",
+      "Depilação facial completa",
+      "Técnicas para peles sensíveis",
+    ],
+    gallery: [
+      "/images/services/depilacao-01.webp",
+      "/images/services/depilacao-02.webp",
+    ],
   },
   {
     id: "estetica-corporal",
@@ -44,6 +76,19 @@ export const SERVICES: Service[] = [
     description: "Drenagem linfática, modelagem corporal e tratamentos redutores.",
     image: "/images/services/estetica-corporal.webp",
     slug: "estetica-corporal",
+    longDescription: "Nossos tratamentos corporais são projetados para promover bem-estar, saúde e autoestima. Combinamos tecnologia avançada com técnicas manuais para resultados visíveis e duradouros.",
+    highlights: [
+      "Drenagem linfática manual",
+      "Modelagem corporal",
+      "Tratamentos redutores de medidas",
+      "Massagem modeladora",
+      "Esfoliação e hidratação corporal",
+      "Protocolos pós-operatório",
+    ],
+    gallery: [
+      "/images/services/estetica-corporal-01.webp",
+      "/images/services/estetica-corporal-02.webp",
+    ],
   },
   {
     id: "estetica-facial",
@@ -51,6 +96,21 @@ export const SERVICES: Service[] = [
     description: "Limpeza de pele, peeling, harmonização e protocolos anti-idade.",
     image: "/images/services/estetica-facial.webp",
     slug: "estetica-facial",
+    longDescription: "Cuidar da pele do rosto é essencial para manter a saúde e a beleza. Nossos protocolos faciais são personalizados de acordo com o tipo de pele e as necessidades de cada cliente, utilizando produtos dermocosméticos de alta performance.",
+    highlights: [
+      "Limpeza de pele profunda",
+      "Peeling químico e enzimático",
+      "Microagulhamento",
+      "Protocolos anti-idade e rejuvenescimento",
+      "Tratamento para acne e manchas",
+      "Harmonização facial",
+      "Skincare personalizado",
+    ],
+    gallery: [
+      "/images/services/estetica-facial-01.webp",
+      "/images/services/estetica-facial-02.webp",
+      "/images/services/estetica-facial-03.webp",
+    ],
   },
   {
     id: "manicure",
@@ -58,6 +118,19 @@ export const SERVICES: Service[] = [
     description: "Esmaltação em gel, spa dos pés, nail art e cuidados completos.",
     image: "/images/services/manicure.webp",
     slug: "manicure-pedicure",
+    longDescription: "Mãos e pés bem cuidados são o cartão de visita da mulher moderna. No Espaço Bless Concept, oferecemos desde a manicure clássica até os designs mais elaborados de nail art, sempre com higiene impecável e produtos de qualidade.",
+    highlights: [
+      "Manicure e pedicure tradicional",
+      "Esmaltação em gel (alongamento e cobertura)",
+      "Nail art e decoração",
+      "Spa dos pés com esfoliação",
+      "Tratamento para unhas fracas",
+      "Cutilagem e hidratação",
+    ],
+    gallery: [
+      "/images/services/manicure-01.webp",
+      "/images/services/manicure-02.webp",
+    ],
   },
   {
     id: "maquiagem",
@@ -65,6 +138,19 @@ export const SERVICES: Service[] = [
     description: "Maquiagem social, editorial e para noivas com produtos de alta performance.",
     image: "/images/services/maquiagem.webp",
     slug: "maquiagem",
+    longDescription: "Nossa equipe de maquiadores profissionais utiliza técnicas de alto padrão e produtos de marcas internacionais para criar looks perfeitos para qualquer ocasião. Do natural ao sofisticado, cada maquiagem é pensada para valorizar sua beleza única.",
+    highlights: [
+      "Maquiagem social para eventos",
+      "Maquiagem para noivas (prova + dia)",
+      "Maquiagem editorial e artística",
+      "Design de sobrancelhas",
+      "Curso de automaquiagem",
+      "Maquiagem para festas e formaturas",
+    ],
+    gallery: [
+      "/images/services/maquiagem-01.webp",
+      "/images/services/maquiagem-02.webp",
+    ],
   },
   {
     id: "massagem",
@@ -72,6 +158,20 @@ export const SERVICES: Service[] = [
     description: "Massagem relaxante, pedras quentes, aromaterapia e reflexologia.",
     image: "/images/services/massagem.webp",
     slug: "massagem-bem-estar",
+    longDescription: "Momentos de relaxamento e bem-estar são fundamentais para o equilíbrio do corpo e da mente. Nossas terapias combinam técnicas ancestrais com abordagens contemporâneas em um ambiente pensado para proporcionar paz e renovação.",
+    highlights: [
+      "Massagem relaxante",
+      "Massagem com pedras quentes",
+      "Aromaterapia",
+      "Reflexologia podal",
+      "Massagem desportiva",
+      "Shiatsu e quick massage",
+      "Day spa personalizado",
+    ],
+    gallery: [
+      "/images/services/massagem-01.webp",
+      "/images/services/massagem-02.webp",
+    ],
   },
 ];
 
@@ -83,7 +183,31 @@ export const BRIDAL_SERVICE: Service = {
   image: "/images/services/noivas.webp",
   slug: "noivas",
   featured: true,
+  longDescription: "O dia mais especial da sua vida merece um preparo à altura. No Espaço Bless Concept, oferecemos uma experiência completa para noivas, com espaço privativo, ambiente acolhedor e profissionais dedicados exclusivamente ao seu cuidado. Do cabelo à maquiagem, da estética facial aos últimos retoques, cada momento é pensado para que você se sinta a mais linda versão de si mesma.",
+  highlights: [
+    "Espaço privativo exclusivo para noivas",
+    "Prova de penteado e maquiagem",
+    "Cabelo e maquiagem no dia do casamento",
+    "Protocolos de estética facial pré-casamento",
+    "Tratamentos corporais preparatórios",
+    "Manicure e pedicure especial noiva",
+    "Pacotes personalizados para madrinhas",
+    "Day bride — dia da noiva completo",
+  ],
+  gallery: [
+    "/images/services/noivas-01.webp",
+    "/images/services/noivas-02.webp",
+    "/images/services/noivas-03.webp",
+  ],
 };
+
+export function getAllServices(): Service[] {
+  return [...SERVICES, BRIDAL_SERVICE];
+}
+
+export function getServiceBySlug(slug: string): Service | undefined {
+  return getAllServices().find((s) => s.slug === slug);
+}
 
 export const TEAM_MEMBERS: TeamMember[] = [
   {

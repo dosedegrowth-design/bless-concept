@@ -156,6 +156,78 @@ button:focus:not(:focus-visible) {
   animation: bounce-gentle 2s ease-in-out infinite;
 }
 
+/* ===== SCROLL ANIMATIONS ===== */
+.animate-hidden {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-hidden[data-variant="fadeDown"] { transform: translateY(-24px); }
+.animate-hidden[data-variant="fadeLeft"] { transform: translateX(-24px); }
+.animate-hidden[data-variant="fadeRight"] { transform: translateX(24px); }
+.animate-hidden[data-variant="fadeIn"] { transform: none; }
+.animate-hidden[data-variant="scaleIn"] { transform: scale(0.97); }
+
+.animate-visible {
+  opacity: 1;
+  transform: translateY(0) translateX(0) scale(1);
+}
+
+/* Line reveal animation for gold dividers */
+@keyframes line-reveal {
+  from { width: 0; }
+  to { width: 64px; }
+}
+
+.animate-line-reveal {
+  animation: line-reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Counter fade animation */
+@keyframes counter-fade {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-counter {
+  animation: counter-fade 0.5s ease-out forwards;
+}
+
+/* Image hover zoom */
+.img-hover-zoom {
+  overflow: hidden;
+}
+
+.img-hover-zoom img {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.img-hover-zoom:hover img {
+  transform: scale(1.05);
+}
+
+/* Card hover lift */
+.card-hover {
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Text gradient gold effect for highlights */
+.text-gradient-gold {
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Stagger children animation delay */
+.stagger-children > * { transition-delay: calc(var(--stagger-index, 0) * 0.1s); }
+
 /* ===== RESPONSIVE UTILITIES ===== */
 @media (prefers-reduced-motion: reduce) {
   *,

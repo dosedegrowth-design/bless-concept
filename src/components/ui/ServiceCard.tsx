@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import type { Service } from "@/types";
 
@@ -29,8 +30,8 @@ export function ServiceCard({ service }: ServiceCardProps) {
         <p className="mt-2 font-body text-sm text-text-light leading-relaxed">
           {service.description}
         </p>
-        <a
-          href="#contato"
+        <Link
+          href={`/servicos/${service.slug}`}
           className="mt-4 inline-flex items-center gap-2 font-body text-sm font-medium text-gold hover:text-gold-light transition-colors group/link"
         >
           <span>Ver detalhes</span>
@@ -38,7 +39,7 @@ export function ServiceCard({ service }: ServiceCardProps) {
             size={14}
             className="transition-transform duration-300 group-hover/link:translate-x-1"
           />
-        </a>
+        </Link>
       </div>
     </div>
   );
