@@ -1,26 +1,169 @@
 @import "tailwindcss";
 
+/* ===== DESIGN TOKENS ===== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Primárias — Dourado */
+  --gold: #C9A96E;
+  --gold-light: #E3C89F;
+  --gold-pale: #F0E6D3;
+  --gold-dark: #A68B5B;
+
+  /* Neutras Escuras */
+  --black: #080300;
+  --charcoal: #141210;
+  --graphite: #222018;
+  --slate: #3D3D3D;
+
+  /* Neutras Claras */
+  --white: #FCFCFC;
+  --cream: #F5F0E8;
+  --pearl: #E8E2D8;
+
+  /* Acentos */
+  --rose: #C4908A;
+  --navy: #1B2A4A;
+
+  /* Texto */
+  --text-light: #A7A7A7;
+  --text-muted: #777777;
+
+  /* WhatsApp */
+  --whatsapp: #25D366;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-gold-pale: var(--gold-pale);
+  --color-gold-dark: var(--gold-dark);
+  --color-black: var(--black);
+  --color-charcoal: var(--charcoal);
+  --color-graphite: var(--graphite);
+  --color-slate: var(--slate);
+  --color-white: var(--white);
+  --color-cream: var(--cream);
+  --color-pearl: var(--pearl);
+  --color-rose: var(--rose);
+  --color-navy: var(--navy);
+  --color-text-light: var(--text-light);
+  --color-text-muted: var(--text-muted);
+  --color-whatsapp: var(--whatsapp);
+  --font-display: var(--font-syne);
+  --font-body: var(--font-inter);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ===== BASE STYLES ===== */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--black);
+  color: var(--white);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ===== FOCUS RESET ===== */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ===== SELECTION ===== */
+::selection {
+  background-color: var(--gold);
+  color: var(--black);
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gold-dark);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
+
+/* ===== SCROLLBAR HIDE UTILITY ===== */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ===== MARQUEE ANIMATION ===== */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 35s linear infinite;
+}
+
+/* ===== PULSE WHATSAPP ===== */
+@keyframes pulse-whatsapp {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 4px 30px rgba(37, 211, 102, 0.5);
+  }
+}
+
+.animate-pulse-whatsapp {
+  animation: pulse-whatsapp 3s ease-in-out infinite;
+}
+
+/* ===== BOUNCE ANIMATION ===== */
+@keyframes bounce-gentle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+.animate-bounce-gentle {
+  animation: bounce-gentle 2s ease-in-out infinite;
+}
+
+/* ===== RESPONSIVE UTILITIES ===== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
