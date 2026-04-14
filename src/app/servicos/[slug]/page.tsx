@@ -6,7 +6,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFloat } from "@/components/ui/WhatsAppFloat";
 import { Container } from "@/components/layout/Container";
-import { getAllServices, getServiceBySlug, getWhatsAppServiceLink, SERVICES, BRIDAL_SERVICE } from "@/lib/constants";
+import { getAllServices, getServiceBySlug, getWhatsAppServiceLink } from "@/lib/constants";
 
 export function generateStaticParams() {
   return getAllServices().map((service) => ({
@@ -14,8 +14,9 @@ export function generateStaticParams() {
   }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const service = getServiceBySlug(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const service = getServiceBySlug(slug);
   if (!service) return { title: "Serviço não encontrado" };
   return {
     title: `${service.title} | Espaço Bless Concept`,
@@ -23,15 +24,16 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   };
 }
 
-export default function ServicePage({ params }: { params: { slug: string } }) {
-  const service = getServiceBySlug(params.slug);
+export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const service = getServiceBySlug(slug);
   if (!service) notFound();
 
   const allServices = getAllServices();
-  const currentIndex = allServices.findIndex((s) => s.slug === params.slug);
+  const currentIndex = allServices.findIndex((s) => s.slug === slug);
   const prevService = currentIndex > 0 ? allServices[currentIndex - 1] : null;
   const nextService = currentIndex < allServices.length - 1 ? allServices[currentIndex + 1] : null;
-  const otherServices = allServices.filter((s) => s.slug !== params.slug).slice(0, 3);
+  const otherServices = allServices.filter((s) => s.slug !== slug).slice(0, 4);
 
   return (
     <>
@@ -52,7 +54,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           </div>
           <Container className="relative z-10 pb-12">
             <Link
-              href="/#servicos"
+              href="/servicos"
               className="inline-flex items-center gap-2 font-body text-sm text-text-light hover:text-white transition-colors mb-6"
             >
               <ArrowLeft size={16} />
@@ -161,10 +163,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
             {/* Prev / Next Navigation */}
             <div className="mt-20 pt-12 border-t border-white/5 grid grid-cols-2 gap-8">
               {prevService ? (
-                <Link
-                  href={`/servicos/${prevService.slug}`}
-                  className="group"
-                >
+                <Link href={`/servicos/${prevService.slug}`} className="group">
                   <span className="font-body text-xs text-text-muted">Anterior</span>
                   <p className="font-display text-lg font-medium text-white group-hover:text-gold transition-colors mt-1">
                     {prevService.title}
@@ -174,10 +173,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                 <div />
               )}
               {nextService ? (
-                <Link
-                  href={`/servicos/${nextService.slug}`}
-                  className="group text-right"
-                >
+                <Link href={`/servicos/${nextService.slug}`} className="group text-right">
                   <span className="font-body text-xs text-text-muted">Próximo</span>
                   <p className="font-display text-lg font-medium text-white group-hover:text-gold transition-colors mt-1">
                     {nextService.title}
