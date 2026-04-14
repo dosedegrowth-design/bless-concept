@@ -31,7 +31,7 @@ export function ServicesSection() {
 
         {/* Bridal card — full width, separado, destaque */}
         <AnimateOnScroll variant="fadeUp" delay={0.2} className="mt-6">
-          <Link href={`/servicos/${BRIDAL_SERVICE.slug}`} className="group block">
+          <Link href="/noivas" className="group block">
             <div className="relative bg-charcoal border border-gold/30 rounded-lg overflow-hidden">
               <div className="grid grid-cols-1 md:grid-cols-2 min-h-[320px]">
                 {/* Image */}
