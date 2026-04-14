@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
-import { Syne, Inter } from "next/font/google";
+import { Kalnia, Pontano_Sans } from "next/font/google";
 import "./globals.css";
 
-const syne = Syne({
-  variable: "--font-syne",
+const kalnia = Kalnia({
+  variable: "--font-kalnia",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const pontano = Pontano_Sans({
+  variable: "--font-pontano",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   display: "swap",
@@ -54,7 +54,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${syne.variable} ${inter.variable}`}
+      className={`${kalnia.variable} ${pontano.variable}`}
     >
       <body>{children}</body>
     </html>
