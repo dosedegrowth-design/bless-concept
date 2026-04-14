@@ -1,13 +1,14 @@
 "use client";
 
 import { getWhatsAppLink } from "@/lib/constants";
+import { img } from "@/lib/supabase";
 
 export function CTASection() {
   return (
     <section className="relative py-32 md:py-40 overflow-hidden">
       <div
         className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: "url(/images/cta/cta-bg.webp)" }}
+        style={{ backgroundImage: `url(${img("images/cta/cta-bg.webp")})` }}
       />
       <div className="absolute inset-0 bg-black/75" />
 

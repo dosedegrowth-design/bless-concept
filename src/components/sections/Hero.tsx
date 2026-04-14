@@ -2,6 +2,7 @@
 
 import { ChevronDown } from "lucide-react";
 import { getWhatsAppLink } from "@/lib/constants";
+import { img } from "@/lib/supabase";
 
 export function Hero() {
   return (
@@ -9,7 +10,7 @@ export function Hero() {
       {/* Background */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url(/images/hero/hero-bg.webp)" }}
+        style={{ backgroundImage: `url(${img("images/hero/hero-bg.webp")})` }}
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/80" />
 

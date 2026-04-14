@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { img } from "@/lib/supabase";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { SectionLabel } from "@/components/ui/SectionLabel";
@@ -18,7 +19,7 @@ export function AboutSection() {
             <div className="relative">
               <div className="relative aspect-[3/4] overflow-hidden rounded-lg">
                 <Image
-                  src="/images/about/sobre-interior.webp"
+                  src={img("images/about/sobre-interior.webp")}
                   alt="Interior do Espaço Bless Concept"
                   fill
                   className="object-cover"

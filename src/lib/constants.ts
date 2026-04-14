@@ -1,4 +1,5 @@
 import { NavItem, Service, TeamMember, Testimonial, Stat } from "@/types";
+import { img } from "@/lib/supabase";
 
 export const WHATSAPP_NUMBER = "5511989812898";
 export const WHATSAPP_BASE_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
@@ -32,7 +33,7 @@ export const SERVICES: Service[] = [
     id: "cabelos",
     title: "Cabelos",
     description: "Nossos profissionais são especializados em visagismo, proporcionando cortes, cores e tratamentos sob medida para valorizar seu estilo e a saúde dos seus fios.",
-    image: "/images/services/cabelos.webp",
+    image: img("images/services/cabelos.webp"),
     slug: "cabelos",
     longDescription: "Nossos profissionais são especializados em visagismo, proporcionando cortes, cores e tratamentos sob medida para valorizar seu estilo e a saúde dos seus fios. Trabalhamos com técnicas das principais escolas internacionais, garantindo resultados modernos e personalizados.",
     highlights: [
@@ -44,16 +45,16 @@ export const SERVICES: Service[] = [
       "Penteados para todas as ocasiões",
     ],
     gallery: [
-      "/images/services/cabelos-01.webp",
-      "/images/services/cabelos-02.webp",
-      "/images/services/cabelos-03.webp",
+      img("images/services/cabelos-01.webp"),
+      img("images/services/cabelos-02.webp"),
+      img("images/services/cabelos-03.webp"),
     ],
   },
   {
     id: "depilacao",
     title: "Depilação",
     description: "Para uma pele sempre macia e livre de pelos, oferecemos serviços de depilação com cera quente e técnicas seguras.",
-    image: "/images/services/depilacao.webp",
+    image: img("images/services/depilacao.webp"),
     slug: "depilacao",
     longDescription: "Para uma pele sempre macia e livre de pelos, oferecemos serviços de depilação com cera quente e técnicas seguras, proporcionando conforto, higiene e excelentes resultados.",
     highlights: [
@@ -65,15 +66,15 @@ export const SERVICES: Service[] = [
       "Nariz e orelha",
     ],
     gallery: [
-      "/images/services/depilacao-01.webp",
-      "/images/services/depilacao-02.webp",
+      img("images/services/depilacao-01.webp"),
+      img("images/services/depilacao-02.webp"),
     ],
   },
   {
     id: "estetica-corporal",
     title: "Estética Corporal",
     description: "Tratamentos corporais que remodelam, rejuvenescem e melhoram a qualidade da pele, com protocolos exclusivos.",
-    image: "/images/services/estetica-corporal.webp",
+    image: img("images/services/estetica-corporal.webp"),
     slug: "estetica-corporal",
     longDescription: "Cuidar do corpo é investir em bem-estar, autoestima e saúde. Oferecemos tratamentos corporais que remodelam, rejuvenescem e melhoram a qualidade da pele, com protocolos exclusivos e atendimento personalizado.",
     highlights: [
@@ -84,15 +85,15 @@ export const SERVICES: Service[] = [
       "Procedimentos para harmonização corporal (ex.: Glúteo Max)",
     ],
     gallery: [
-      "/images/services/estetica-corporal-01.webp",
-      "/images/services/estetica-corporal-02.webp",
+      img("images/services/estetica-corporal-01.webp"),
+      img("images/services/estetica-corporal-02.webp"),
     ],
   },
   {
     id: "estetica-facial",
     title: "Estética Facial",
     description: "Realce sua beleza natural e conquiste uma pele saudável e radiante com nossos protocolos personalizados.",
-    image: "/images/services/estetica-facial.webp",
+    image: img("images/services/estetica-facial.webp"),
     slug: "estetica-facial",
     longDescription: "Realce sua beleza natural e conquiste uma pele saudável e radiante. Nossos protocolos combinam tecnologia, expertise e produtos de alta performance para resultados visíveis e duradouros.",
     highlights: [
@@ -104,16 +105,16 @@ export const SERVICES: Service[] = [
       "Procedimentos estéticos: Botox, preenchimentos, bioestimuladores de colágeno",
     ],
     gallery: [
-      "/images/services/estetica-facial-01.webp",
-      "/images/services/estetica-facial-02.webp",
-      "/images/services/estetica-facial-03.webp",
+      img("images/services/estetica-facial-01.webp"),
+      img("images/services/estetica-facial-02.webp"),
+      img("images/services/estetica-facial-03.webp"),
     ],
   },
   {
     id: "manicure",
     title: "Manicure e Pedicure",
     description: "Mãos e pés bem cuidados são um detalhe que faz toda a diferença. Técnicas modernas e produtos de alta qualidade.",
-    image: "/images/services/manicure.webp",
+    image: img("images/services/manicure.webp"),
     slug: "manicure-pedicure",
     longDescription: "Mãos e pés bem cuidados são um detalhe que faz toda a diferença. Trabalhamos com técnicas modernas e produtos de alta qualidade para garantir beleza e saúde.",
     highlights: [
@@ -125,15 +126,15 @@ export const SERVICES: Service[] = [
       "Esmaltação decorativa",
     ],
     gallery: [
-      "/images/services/manicure-01.webp",
-      "/images/services/manicure-02.webp",
+      img("images/services/manicure-01.webp"),
+      img("images/services/manicure-02.webp"),
     ],
   },
   {
     id: "maquiagem",
     title: "Maquiagem",
     description: "Sua beleza realçada para qualquer ocasião. Técnicas modernas para valorizar seus traços.",
-    image: "/images/services/maquiagem.webp",
+    image: img("images/services/maquiagem.webp"),
     slug: "maquiagem",
     longDescription: "Sua beleza realçada para qualquer ocasião. Nossos maquiadores trabalham técnicas modernas para valorizar seus traços, seja para o dia a dia ou eventos especiais.",
     highlights: [
@@ -143,15 +144,15 @@ export const SERVICES: Service[] = [
       "Consultoria de maquiagem personalizada",
     ],
     gallery: [
-      "/images/services/maquiagem-01.webp",
-      "/images/services/maquiagem-02.webp",
+      img("images/services/maquiagem-01.webp"),
+      img("images/services/maquiagem-02.webp"),
     ],
   },
   {
     id: "massagem",
     title: "Massagem & Bem-Estar",
     description: "Equilibre corpo e mente com nossos protocolos exclusivos de relaxamento e terapia.",
-    image: "/images/services/massagem.webp",
+    image: img("images/services/massagem.webp"),
     slug: "massagem-bem-estar",
     longDescription: "Equilibre corpo e mente com nossos protocolos exclusivos. Técnicas de relaxamento e abordagens terapêuticas que reduzem tensões, melhoram a circulação e proporcionam bem-estar imediato.",
     highlights: [
@@ -162,8 +163,8 @@ export const SERVICES: Service[] = [
       "Reflexologia e escalda-pés",
     ],
     gallery: [
-      "/images/services/massagem-01.webp",
-      "/images/services/massagem-02.webp",
+      img("images/services/massagem-01.webp"),
+      img("images/services/massagem-02.webp"),
     ],
   },
 ];
@@ -173,7 +174,7 @@ export const BRIDAL_SERVICE: Service = {
   title: "Experiência Noivas",
   description:
     "Espaço exclusivo para noivas, com pacotes personalizados para o seu grande dia, incluindo cabelo, maquiagem e estética.",
-  image: "/images/services/noivas.webp",
+  image: img("images/services/noivas.webp"),
   slug: "noivas",
   featured: true,
   longDescription: "O dia mais especial da sua vida merece um preparo à altura. No Espaço Bless Concept, oferecemos uma experiência completa para noivas, com espaço privativo, ambiente acolhedor e profissionais dedicados exclusivamente ao seu cuidado. Do cabelo à maquiagem, da estética facial aos últimos retoques, cada momento é pensado para que você se sinta a mais linda versão de si mesma.",
@@ -188,9 +189,9 @@ export const BRIDAL_SERVICE: Service = {
     "Day bride — dia da noiva completo",
   ],
   gallery: [
-    "/images/services/noivas-01.webp",
-    "/images/services/noivas-02.webp",
-    "/images/services/noivas-03.webp",
+    img("images/services/noivas-01.webp"),
+    img("images/services/noivas-02.webp"),
+    img("images/services/noivas-03.webp"),
   ],
 };
 
@@ -208,35 +209,35 @@ export const TEAM_MEMBERS: TeamMember[] = [
     name: "Profissional 1",
     role: "Hair Stylist",
     specialty: "Coloração & Mechas",
-    image: "/images/team/membro-01.webp",
+    image: img("images/team/membro-01.webp"),
   },
   {
     id: "2",
     name: "Profissional 2",
     role: "Esteticista",
     specialty: "Estética Facial",
-    image: "/images/team/membro-02.webp",
+    image: img("images/team/membro-02.webp"),
   },
   {
     id: "3",
     name: "Profissional 3",
     role: "Nail Designer",
     specialty: "Nail Art & Spa",
-    image: "/images/team/membro-03.webp",
+    image: img("images/team/membro-03.webp"),
   },
   {
     id: "4",
     name: "Profissional 4",
     role: "Massoterapeuta",
     specialty: "Massagem Terapêutica",
-    image: "/images/team/membro-04.webp",
+    image: img("images/team/membro-04.webp"),
   },
   {
     id: "5",
     name: "Profissional 5",
     role: "Maquiadora",
     specialty: "Maquiagem Social & Noivas",
-    image: "/images/team/membro-05.webp",
+    image: img("images/team/membro-05.webp"),
   },
 ];
 

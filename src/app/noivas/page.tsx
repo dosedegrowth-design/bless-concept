@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Crown, Sparkles, Heart, Star, ArrowLeft, Gift, Check } from "lucide-react";
+import { img } from "@/lib/supabase";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFloat } from "@/components/ui/WhatsAppFloat";
@@ -28,7 +29,7 @@ const EXPERIENCES = [
       "Sala VIP privativa",
       "Finalização impecável no grande dia",
     ],
-    image: "/images/noivas/experiencia-kate.webp",
+    image: img("images/noivas/experiencia-kate.webp"),
     price: "Valores sob consulta",
   },
   {
@@ -44,7 +45,7 @@ const EXPERIENCES = [
       "Ambiente sereno e acolhedor",
       "Vivência emocional inesquecível",
     ],
-    image: "/images/noivas/experiencia-diana.webp",
+    image: img("images/noivas/experiencia-diana.webp"),
     price: "Valores sob consulta",
   },
   {
@@ -60,7 +61,7 @@ const EXPERIENCES = [
       "Acompanhante inclusa no pacote",
       "Experiência completa digna de realeza",
     ],
-    image: "/images/noivas/experiencia-elizabeth.webp",
+    image: img("images/noivas/experiencia-elizabeth.webp"),
     price: "Valores sob consulta",
     featured: true,
   },
@@ -81,7 +82,7 @@ export default function NoivasPage() {
         <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0">
             <Image
-              src="/images/noivas/noivas-hero.webp"
+              src={img("images/noivas/noivas-hero.webp")}
               alt="Experiência Noivas — Espaço Bless Concept"
               fill
               className="object-cover"
@@ -231,7 +232,7 @@ export default function NoivasPage() {
                 <AnimateOnScroll key={n} variant="scaleIn" delay={n * 0.05}>
                   <div className="relative aspect-[3/4] overflow-hidden rounded-lg img-hover-zoom">
                     <Image
-                      src={`/images/noivas/galeria-${String(n).padStart(2, "0")}.webp`}
+                      src={img(`images/noivas/galeria-${String(n).padStart(2, "0")}.webp`)}
                       alt={`Noivas — Galeria ${n}`}
                       fill
                       className="object-cover"
@@ -248,7 +249,7 @@ export default function NoivasPage() {
         <section className="relative py-32 md:py-40 overflow-hidden">
           <div
             className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: "url(/images/noivas/noivas-cta.webp)" }}
+            style={{ backgroundImage: `url(${img("images/noivas/noivas-cta.webp")})` }}
           />
           <div className="absolute inset-0 bg-black/75" />
 

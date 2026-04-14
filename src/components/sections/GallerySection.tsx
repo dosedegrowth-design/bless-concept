@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { img } from "@/lib/supabase";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { SectionLabel } from "@/components/ui/SectionLabel";
@@ -8,14 +9,14 @@ import { SectionTitle } from "@/components/ui/SectionTitle";
 import { AnimateOnScroll } from "@/components/animation/AnimateOnScroll";
 
 const GALLERY_IMAGES = [
-  { src: "/images/gallery/espaco-01.webp", alt: "Recepção", span: "col-span-2 row-span-2" },
-  { src: "/images/gallery/espaco-02.webp", alt: "Sala de corte", span: "" },
-  { src: "/images/gallery/espaco-03.webp", alt: "Espelho e iluminação", span: "" },
-  { src: "/images/gallery/espaco-04.webp", alt: "Área de estética", span: "" },
-  { src: "/images/gallery/espaco-05.webp", alt: "Detalhes do ambiente", span: "" },
-  { src: "/images/gallery/espaco-06.webp", alt: "Produtos premium", span: "col-span-2" },
-  { src: "/images/gallery/espaco-07.webp", alt: "Cadeira de atendimento", span: "" },
-  { src: "/images/gallery/espaco-08.webp", alt: "Ambiente relaxante", span: "" },
+  { src: img("images/gallery/espaco-01.webp"), alt: "Recepção", span: "col-span-2 row-span-2" },
+  { src: img("images/gallery/espaco-02.webp"), alt: "Sala de corte", span: "" },
+  { src: img("images/gallery/espaco-03.webp"), alt: "Espelho e iluminação", span: "" },
+  { src: img("images/gallery/espaco-04.webp"), alt: "Área de estética", span: "" },
+  { src: img("images/gallery/espaco-05.webp"), alt: "Detalhes do ambiente", span: "" },
+  { src: img("images/gallery/espaco-06.webp"), alt: "Produtos premium", span: "col-span-2" },
+  { src: img("images/gallery/espaco-07.webp"), alt: "Cadeira de atendimento", span: "" },
+  { src: img("images/gallery/espaco-08.webp"), alt: "Ambiente relaxante", span: "" },
 ];
 
 export function GallerySection() {

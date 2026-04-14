@@ -11,3 +11,13 @@ export function getPublicUrl(path: string): string {
   const { data } = supabase.storage.from(BUCKET).getPublicUrl(path);
   return data.publicUrl;
 }
+
+/**
+ * Converte path local para URL do Supabase Storage.
+ * Ex: "/images/hero/hero-bg.webp" -> "https://hkjukobqpjezhpxzplpj.supabase.co/storage/v1/object/public/bless-images/images/hero/hero-bg.webp"
+ */
+export function img(localPath: string): string {
+  // Remove leading slash
+  const clean = localPath.startsWith("/") ? localPath.slice(1) : localPath;
+  return `${SUPABASE_URL}/storage/v1/object/public/${BUCKET}/${clean}`;
+}
