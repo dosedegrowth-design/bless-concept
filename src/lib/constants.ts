@@ -20,7 +20,7 @@ export function getWhatsAppServiceLink(serviceName: string): string {
 }
 
 export const NAV_ITEMS: NavItem[] = [
-  { label: "Serviços", href: "/#servicos" },
+  { label: "Serviços", href: "/servicos" },
   { label: "Sobre", href: "/#sobre" },
   { label: "Equipe", href: "/#equipe" },
   { label: "Espaço", href: "/#espaco" },
@@ -30,19 +30,18 @@ export const NAV_ITEMS: NavItem[] = [
 export const SERVICES: Service[] = [
   {
     id: "cabelos",
-    title: "Beleza & Cabelos",
-    description: "Corte, coloração, mechas, tratamentos capilares e reconstrução com produtos premium.",
+    title: "Cabelos",
+    description: "Nossos profissionais são especializados em visagismo, proporcionando cortes, cores e tratamentos sob medida para valorizar seu estilo e a saúde dos seus fios.",
     image: "/images/services/cabelos.webp",
-    slug: "beleza-cabelos",
-    longDescription: "No Espaço Bless Concept, seus cabelos recebem um tratamento completo com as melhores técnicas e produtos do mercado. Desde cortes modernos até colorações personalizadas, cada serviço é realizado por profissionais especializados que entendem a individualidade de cada fio.",
+    slug: "cabelos",
+    longDescription: "Nossos profissionais são especializados em visagismo, proporcionando cortes, cores e tratamentos sob medida para valorizar seu estilo e a saúde dos seus fios. Trabalhamos com técnicas das principais escolas internacionais, garantindo resultados modernos e personalizados.",
     highlights: [
-      "Corte feminino e masculino",
-      "Coloração e retoque de raiz",
-      "Mechas, luzes e balayage",
-      "Tratamento de reconstrução capilar",
-      "Hidratação profunda",
-      "Escova progressiva e definitiva",
-      "Penteados para eventos",
+      "Cortes femininos, masculinos e infantis",
+      "Escova e penteados",
+      "Coloração, mechas e tonalização",
+      "Hidratação, reconstrução e tratamentos capilares",
+      "Relaxamento e alisamento",
+      "Penteados para todas as ocasiões",
     ],
     gallery: [
       "/images/services/cabelos-01.webp",
@@ -53,17 +52,17 @@ export const SERVICES: Service[] = [
   {
     id: "depilacao",
     title: "Depilação",
-    description: "Depilação com cera, linha e técnicas avançadas para pele sensível.",
+    description: "Para uma pele sempre macia e livre de pelos, oferecemos serviços de depilação com cera quente e técnicas seguras.",
     image: "/images/services/depilacao.webp",
     slug: "depilacao",
-    longDescription: "Oferecemos depilação com técnicas que priorizam o conforto e a saúde da pele. Nossos profissionais são treinados nas melhores práticas para garantir resultados duradouros com o mínimo de desconforto.",
+    longDescription: "Para uma pele sempre macia e livre de pelos, oferecemos serviços de depilação com cera quente e técnicas seguras, proporcionando conforto, higiene e excelentes resultados.",
     highlights: [
-      "Depilação com cera quente e fria",
-      "Depilação com linha (threading)",
-      "Buço, axila e virilha",
-      "Pernas completa e meia perna",
-      "Depilação facial completa",
-      "Técnicas para peles sensíveis",
+      "Buço, axilas e rosto",
+      "Pernas (inteira, meia-perna e coxas)",
+      "Virilha (simples ou completa)",
+      "Glúteos, costas, braços e abdômen",
+      "Tratamentos progressivos e alisamentos",
+      "Nariz e orelha",
     ],
     gallery: [
       "/images/services/depilacao-01.webp",
@@ -73,17 +72,16 @@ export const SERVICES: Service[] = [
   {
     id: "estetica-corporal",
     title: "Estética Corporal",
-    description: "Drenagem linfática, modelagem corporal e tratamentos redutores.",
+    description: "Tratamentos corporais que remodelam, rejuvenescem e melhoram a qualidade da pele, com protocolos exclusivos.",
     image: "/images/services/estetica-corporal.webp",
     slug: "estetica-corporal",
-    longDescription: "Nossos tratamentos corporais são projetados para promover bem-estar, saúde e autoestima. Combinamos tecnologia avançada com técnicas manuais para resultados visíveis e duradouros.",
+    longDescription: "Cuidar do corpo é investir em bem-estar, autoestima e saúde. Oferecemos tratamentos corporais que remodelam, rejuvenescem e melhoram a qualidade da pele, com protocolos exclusivos e atendimento personalizado.",
     highlights: [
-      "Drenagem linfática manual",
-      "Modelagem corporal",
-      "Tratamentos redutores de medidas",
-      "Massagem modeladora",
-      "Esfoliação e hidratação corporal",
-      "Protocolos pós-operatório",
+      "Massagem relaxante e terapêutica",
+      "Massagem modeladora e drenagem linfática",
+      "Bambuterapia",
+      "Peeling corporal para estrias e renovação da pele",
+      "Procedimentos para harmonização corporal (ex.: Glúteo Max)",
     ],
     gallery: [
       "/images/services/estetica-corporal-01.webp",
@@ -93,18 +91,17 @@ export const SERVICES: Service[] = [
   {
     id: "estetica-facial",
     title: "Estética Facial",
-    description: "Limpeza de pele, peeling, harmonização e protocolos anti-idade.",
+    description: "Realce sua beleza natural e conquiste uma pele saudável e radiante com nossos protocolos personalizados.",
     image: "/images/services/estetica-facial.webp",
     slug: "estetica-facial",
-    longDescription: "Cuidar da pele do rosto é essencial para manter a saúde e a beleza. Nossos protocolos faciais são personalizados de acordo com o tipo de pele e as necessidades de cada cliente, utilizando produtos dermocosméticos de alta performance.",
+    longDescription: "Realce sua beleza natural e conquiste uma pele saudável e radiante. Nossos protocolos combinam tecnologia, expertise e produtos de alta performance para resultados visíveis e duradouros.",
     highlights: [
       "Limpeza de pele profunda",
-      "Peeling químico e enzimático",
-      "Microagulhamento",
-      "Protocolos anti-idade e rejuvenescimento",
-      "Tratamento para acne e manchas",
-      "Harmonização facial",
-      "Skincare personalizado",
+      "Peelings químicos e mecânicos",
+      "Design e henna de sobrancelhas",
+      "Micropigmentação (sobrancelhas, lábios, olhos)",
+      "Extensão de cílios (fio a fio, híbrida, volume russo)",
+      "Procedimentos estéticos: Botox, preenchimentos, bioestimuladores de colágeno",
     ],
     gallery: [
       "/images/services/estetica-facial-01.webp",
@@ -114,18 +111,18 @@ export const SERVICES: Service[] = [
   },
   {
     id: "manicure",
-    title: "Manicure & Pedicure",
-    description: "Esmaltação em gel, spa dos pés, nail art e cuidados completos.",
+    title: "Manicure e Pedicure",
+    description: "Mãos e pés bem cuidados são um detalhe que faz toda a diferença. Técnicas modernas e produtos de alta qualidade.",
     image: "/images/services/manicure.webp",
     slug: "manicure-pedicure",
-    longDescription: "Mãos e pés bem cuidados são o cartão de visita da mulher moderna. No Espaço Bless Concept, oferecemos desde a manicure clássica até os designs mais elaborados de nail art, sempre com higiene impecável e produtos de qualidade.",
+    longDescription: "Mãos e pés bem cuidados são um detalhe que faz toda a diferença. Trabalhamos com técnicas modernas e produtos de alta qualidade para garantir beleza e saúde.",
     highlights: [
-      "Manicure e pedicure tradicional",
-      "Esmaltação em gel (alongamento e cobertura)",
-      "Nail art e decoração",
-      "Spa dos pés com esfoliação",
-      "Tratamento para unhas fracas",
-      "Cutilagem e hidratação",
+      "Esmaltação tradicional e em gel",
+      "Blindagem de unhas",
+      "Banho de gel",
+      "Aplicação de fibra ou gel",
+      "Spa dos pés e reflexologia",
+      "Esmaltação decorativa",
     ],
     gallery: [
       "/images/services/manicure-01.webp",
@@ -135,17 +132,15 @@ export const SERVICES: Service[] = [
   {
     id: "maquiagem",
     title: "Maquiagem",
-    description: "Maquiagem social, editorial e para noivas com produtos de alta performance.",
+    description: "Sua beleza realçada para qualquer ocasião. Técnicas modernas para valorizar seus traços.",
     image: "/images/services/maquiagem.webp",
     slug: "maquiagem",
-    longDescription: "Nossa equipe de maquiadores profissionais utiliza técnicas de alto padrão e produtos de marcas internacionais para criar looks perfeitos para qualquer ocasião. Do natural ao sofisticado, cada maquiagem é pensada para valorizar sua beleza única.",
+    longDescription: "Sua beleza realçada para qualquer ocasião. Nossos maquiadores trabalham técnicas modernas para valorizar seus traços, seja para o dia a dia ou eventos especiais.",
     highlights: [
-      "Maquiagem social para eventos",
-      "Maquiagem para noivas (prova + dia)",
-      "Maquiagem editorial e artística",
-      "Design de sobrancelhas",
-      "Curso de automaquiagem",
-      "Maquiagem para festas e formaturas",
+      "Maquiagem casual",
+      "Produções para eventos e festas",
+      "Maquiagem para noivas",
+      "Consultoria de maquiagem personalizada",
     ],
     gallery: [
       "/images/services/maquiagem-01.webp",
@@ -155,18 +150,16 @@ export const SERVICES: Service[] = [
   {
     id: "massagem",
     title: "Massagem & Bem-Estar",
-    description: "Massagem relaxante, pedras quentes, aromaterapia e reflexologia.",
+    description: "Equilibre corpo e mente com nossos protocolos exclusivos de relaxamento e terapia.",
     image: "/images/services/massagem.webp",
     slug: "massagem-bem-estar",
-    longDescription: "Momentos de relaxamento e bem-estar são fundamentais para o equilíbrio do corpo e da mente. Nossas terapias combinam técnicas ancestrais com abordagens contemporâneas em um ambiente pensado para proporcionar paz e renovação.",
+    longDescription: "Equilibre corpo e mente com nossos protocolos exclusivos. Técnicas de relaxamento e abordagens terapêuticas que reduzem tensões, melhoram a circulação e proporcionam bem-estar imediato.",
     highlights: [
       "Massagem relaxante",
-      "Massagem com pedras quentes",
-      "Aromaterapia",
-      "Reflexologia podal",
-      "Massagem desportiva",
-      "Shiatsu e quick massage",
-      "Day spa personalizado",
+      "Massagem modeladora",
+      "Drenagem linfática manual e facial",
+      "Massagem com cristais, pedras quentes ou bambu",
+      "Reflexologia e escalda-pés",
     ],
     gallery: [
       "/images/services/massagem-01.webp",
@@ -179,7 +172,7 @@ export const BRIDAL_SERVICE: Service = {
   id: "noivas",
   title: "Experiência Noivas",
   description:
-    "Um dia especial merece um atendimento à altura. Pacotes exclusivos com espaço privativo, cabelo, maquiagem, estética facial e corporal. Cuidamos de cada detalhe para que você brilhe no seu grande dia.",
+    "Espaço exclusivo para noivas, com pacotes personalizados para o seu grande dia, incluindo cabelo, maquiagem e estética.",
   image: "/images/services/noivas.webp",
   slug: "noivas",
   featured: true,
@@ -287,6 +280,7 @@ export const STATS: Stat[] = [
 export const BUSINESS_INFO = {
   name: "Espaço Bless Concept",
   tagline: "Beleza é uma arte e você é nossa obra-prima",
+  description: "Um salão de beleza, estética avançada e espaço exclusivo para noivas. Um novo padrão de cuidado, sofisticação e experiência.",
   address: "Av. Casa Verde, nº 162, Piso Superior",
   complement: "Acima do restaurante",
   city: "São Paulo - SP",
@@ -330,11 +324,34 @@ export const PILLARS = [
   {
     icon: "sparkles",
     title: "Produtos Premium",
-    description: "Trabalhamos apenas com as melhores marcas do mercado para resultados excepcionais.",
+    description: "Trabalhamos com diversas linhas premium, incluindo opções veganas e cruelty-free.",
   },
   {
     icon: "heart",
     title: "Experiência",
     description: "Cada visita é uma jornada completa de cuidado, bem-estar e transformação pessoal.",
+  },
+];
+
+export const FAQ = [
+  {
+    question: "Como faço para agendar um horário?",
+    answer: "Você pode agendar pelo WhatsApp, pelo formulário do site ou diretamente na recepção do salão.",
+  },
+  {
+    question: "Vocês trabalham com produtos veganos e cruelty-free?",
+    answer: "Sim! Temos diversas linhas veganas e cruelty-free disponíveis. Basta informar sua preferência no agendamento.",
+  },
+  {
+    question: "Tenho alergias ou sensibilidades. Como funciona?",
+    answer: "Nosso atendimento é 100% personalizado. Fazemos uma avaliação prévia dos produtos para garantir sua segurança e conforto.",
+  },
+  {
+    question: "Posso fazer mais de um serviço no mesmo dia?",
+    answer: "Claro! Nossa agenda é flexível para você aproveitar ao máximo sua visita e combinar diferentes serviços.",
+  },
+  {
+    question: "Quais formas de pagamento vocês aceitam?",
+    answer: "Aceitamos Pix, débito, crédito e dinheiro. Para pacotes especiais como noivas, consulte nossas políticas de sinal.",
   },
 ];
