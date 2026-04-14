@@ -74,70 +74,31 @@ const SLOTS: ImageSlot[] = [
   { id: "logo", label: "Logo PNG", category: "Logo", path: "images/logo/logo.png", description: "Fundo transparente.", size: "1000x1000 mín", type: "image" },
 ];
 
-// Converte qualquer imagem (HEIC, JPEG, PNG, etc.) para WebP via Canvas
-async function convertToWebP(file: File, quality = 0.85): Promise<File> {
-  // Se já é WebP ou é vídeo, retorna sem converter
-  if (file.type === "image/webp" || file.type.startsWith("video/")) return file;
+const UPLOAD_FN_URL = "https://hkjukobqpjezhpxzplpj.supabase.co/functions/v1/bless-upload";
 
-  return new Promise((resolve, reject) => {
-    const img = document.createElement("img");
-    const url = URL.createObjectURL(file);
+// Upload via Edge Function (detecta HEIC por magic bytes no servidor)
+async function uploadToSupabase(file: File, path: string): Promise<{ url: string | null; errorMsg?: string }> {
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("path", path);
 
-    img.onload = () => {
-      const canvas = document.createElement("canvas");
-      canvas.width = img.naturalWidth;
-      canvas.height = img.naturalHeight;
+  try {
+    const res = await fetch(UPLOAD_FN_URL, { method: "POST", body: formData });
+    const data = await res.json();
 
-      const ctx = canvas.getContext("2d");
-      if (!ctx) { reject(new Error("Canvas context failed")); return; }
+    if (!res.ok) {
+      if (data.error === "HEIC_NOT_SUPPORTED") {
+        return { url: null, errorMsg: data.message };
+      }
+      return { url: null, errorMsg: data.error || "Erro no upload" };
+    }
 
-      ctx.drawImage(img, 0, 0);
-      URL.revokeObjectURL(url);
-
-      canvas.toBlob(
-        (blob) => {
-          if (!blob) { reject(new Error("WebP conversion failed")); return; }
-          resolve(new File([blob], file.name.replace(/\.[^.]+$/, ".webp"), { type: "image/webp" }));
-        },
-        "image/webp",
-        quality
-      );
-    };
-
-    img.onerror = () => {
-      URL.revokeObjectURL(url);
-      // Se o browser não suporta o formato (ex: HEIC no Chrome), retorna original
-      console.warn("Conversão falhou — enviando arquivo original:", file.type);
-      resolve(file);
-    };
-
-    img.src = url;
-  });
-}
-
-// Upload DIRETO do browser para o Supabase com conversão automática para WebP
-async function uploadToSupabase(file: File, path: string): Promise<string | null> {
-  // Converte para WebP se o slot espera .webp
-  const finalFile = path.endsWith(".webp") ? await convertToWebP(file) : file;
-  const contentType = path.endsWith(".webp") ? "image/webp" : finalFile.type;
-
-  const { error } = await supabase.storage.from(BUCKET).upload(path, finalFile, {
-    upsert: true,
-    contentType,
-  });
-
-  if (error) {
-    console.error("Supabase upload error:", error);
-    return null;
+    return { url: data.url };
+  } catch (err) {
+    console.error("Upload error:", err);
+    return { url: null, errorMsg: "Erro de conexão" };
   }
-
-  const { data } = supabase.storage.from(BUCKET).getPublicUrl(path);
-  return data.publicUrl;
 }
-
-// Formatos HEIC não são suportados pela maioria dos browsers
-const BLOCKED_TYPES = ["image/heic", "image/heif"];
-const ACCEPTED_IMAGE_TYPES = "image/jpeg,image/png,image/webp,image/gif";
 
 function Slot({ slot, existingUrl }: { slot: ImageSlot; existingUrl: string | null }) {
   const [uploading, setUploading] = useState(false);
@@ -154,31 +115,21 @@ function Slot({ slot, existingUrl }: { slot: ImageSlot; existingUrl: string | nu
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // Bloqueia HEIC/HEIF — verificar tipo E extensão (iOS nem sempre seta mimetype)
-    const ext = file.name.split(".").pop()?.toLowerCase() || "";
-    if (BLOCKED_TYPES.includes(file.type) || ext === "heic" || ext === "heif") {
-      setError(true);
-      setErrorMsg("HEIC não suportado. Converta para JPG antes de enviar.");
-      e.target.value = "";
-      return;
-    }
-
     setUploading(true);
     setError(false);
     setErrorMsg("");
 
-    const publicUrl = await uploadToSupabase(file, slot.path);
+    const result = await uploadToSupabase(file, slot.path);
 
-    if (publicUrl) {
-      setUrl(publicUrl + "?t=" + Date.now());
+    if (result.url) {
+      setUrl(result.url + "?t=" + Date.now());
       setError(false);
     } else {
       setError(true);
-      setErrorMsg("Falhou — clique para tentar de novo");
+      setErrorMsg(result.errorMsg || "Falhou — clique para tentar de novo");
     }
 
     setUploading(false);
-    // Reset input so same file can be selected again
     e.target.value = "";
   }
 
@@ -201,7 +152,7 @@ function Slot({ slot, existingUrl }: { slot: ImageSlot; existingUrl: string | nu
       <label className={`relative block border border-dashed rounded-lg text-center cursor-pointer transition-colors ${error ? "border-red-500/30" : "border-white/10 hover:border-white/20"}`}>
         <input
           type="file"
-          accept={slot.type === "video" ? "video/*" : ACCEPTED_IMAGE_TYPES}
+          accept={slot.type === "video" ? "video/*" : "image/*"}
           onChange={handleChange}
           className="absolute inset-0 opacity-0 cursor-pointer"
           disabled={uploading}
