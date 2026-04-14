@@ -106,23 +106,28 @@ function UploadSlot({
   const handleFile = useCallback(
     async (file: File) => {
       setStatus("uploading");
-      if (file.type.startsWith("image/")) {
-        setPreview(URL.createObjectURL(file));
-      }
+      const localPreview = file.type.startsWith("image/") ? URL.createObjectURL(file) : null;
+      if (localPreview) setPreview(localPreview);
+
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("path", slot.path);
 
       try {
-        const formData = new FormData();
-        formData.append("file", file);
-        formData.append("path", slot.path);
-
         const res = await fetch("/api/upload", { method: "POST", body: formData });
-        if (!res.ok) throw new Error("Upload failed");
-
         const data = await res.json();
-        setPreview(data.url);
+
+        if (!res.ok || !data.success) {
+          console.error("Upload error:", data);
+          setStatus("error");
+          return;
+        }
+
+        setPreview(data.url + "?t=" + Date.now());
         setStatus("saved");
         onUpload(slot.id);
-      } catch {
+      } catch (err) {
+        console.error("Upload exception:", err);
         setStatus("error");
       }
     },
@@ -141,7 +146,10 @@ function UploadSlot({
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const f = e.target.files?.[0];
-      if (f) handleFile(f);
+      if (f) {
+        setStatus("empty"); // Reset error state
+        handleFile(f);
+      }
     },
     [handleFile]
   );
@@ -172,14 +180,17 @@ function UploadSlot({
         className="relative border border-dashed border-white/10 rounded-lg text-center cursor-pointer hover:border-white/20 transition-colors"
       >
         <input type="file" accept={slot.type === "video" ? "video/*" : "image/*"} onChange={handleChange} className="absolute inset-0 opacity-0 cursor-pointer z-10" />
-        {preview && status !== "error" ? (
+        {preview && status === "saved" ? (
           /* eslint-disable-next-line @next/next/no-img-element */
           <img src={preview} alt="" className="w-full h-24 object-cover rounded" />
         ) : status === "error" ? (
           <div className="py-4">
-            <X size={18} className="text-red-400 mx-auto mb-1" />
-            <p className="font-body text-[11px] text-red-400">Erro — tente de novo</p>
+            <Upload size={18} className="text-red-400 mx-auto mb-1" />
+            <p className="font-body text-[11px] text-red-400">Falhou — clique para tentar de novo</p>
           </div>
+        ) : status === "uploading" && preview ? (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img src={preview} alt="" className="w-full h-24 object-cover rounded opacity-50" />
         ) : (
           <div className="py-4">
             <Upload size={18} className="text-text-muted mx-auto mb-1" />
