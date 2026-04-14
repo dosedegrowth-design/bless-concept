@@ -16,7 +16,7 @@ export function Hero() {
       {/* Content */}
       <div className="relative z-10 text-center px-6 max-w-[900px] mx-auto">
         <span className="inline-block px-5 py-2 rounded-full border border-white/15 font-body text-xs font-medium tracking-widest uppercase text-text-light">
-          São Paulo
+          Casa Verde — Zona Norte
         </span>
 
         <h1 className="mt-8 font-display text-5xl md:text-6xl lg:text-7xl font-medium capitalize leading-tight text-white">
