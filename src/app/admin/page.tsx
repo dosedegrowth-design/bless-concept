@@ -135,10 +135,15 @@ async function uploadToSupabase(file: File, path: string): Promise<string | null
   return data.publicUrl;
 }
 
+// Formatos HEIC não são suportados pela maioria dos browsers
+const BLOCKED_TYPES = ["image/heic", "image/heif"];
+const ACCEPTED_IMAGE_TYPES = "image/jpeg,image/png,image/webp,image/gif";
+
 function Slot({ slot, existingUrl }: { slot: ImageSlot; existingUrl: string | null }) {
   const [uploading, setUploading] = useState(false);
   const [url, setUrl] = useState<string | null>(existingUrl);
   const [error, setError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   // Sync when parent finishes loading existing URLs
   useEffect(() => {
@@ -149,8 +154,18 @@ function Slot({ slot, existingUrl }: { slot: ImageSlot; existingUrl: string | nu
     const file = e.target.files?.[0];
     if (!file) return;
 
+    // Bloqueia HEIC/HEIF — verificar tipo E extensão (iOS nem sempre seta mimetype)
+    const ext = file.name.split(".").pop()?.toLowerCase() || "";
+    if (BLOCKED_TYPES.includes(file.type) || ext === "heic" || ext === "heif") {
+      setError(true);
+      setErrorMsg("HEIC não suportado. Converta para JPG antes de enviar.");
+      e.target.value = "";
+      return;
+    }
+
     setUploading(true);
     setError(false);
+    setErrorMsg("");
 
     const publicUrl = await uploadToSupabase(file, slot.path);
 
@@ -159,6 +174,7 @@ function Slot({ slot, existingUrl }: { slot: ImageSlot; existingUrl: string | nu
       setError(false);
     } else {
       setError(true);
+      setErrorMsg("Falhou — clique para tentar de novo");
     }
 
     setUploading(false);
@@ -185,7 +201,7 @@ function Slot({ slot, existingUrl }: { slot: ImageSlot; existingUrl: string | nu
       <label className={`relative block border border-dashed rounded-lg text-center cursor-pointer transition-colors ${error ? "border-red-500/30" : "border-white/10 hover:border-white/20"}`}>
         <input
           type="file"
-          accept={slot.type === "video" ? "video/*" : "image/*"}
+          accept={slot.type === "video" ? "video/*" : ACCEPTED_IMAGE_TYPES}
           onChange={handleChange}
           className="absolute inset-0 opacity-0 cursor-pointer"
           disabled={uploading}
@@ -214,8 +230,9 @@ function Slot({ slot, existingUrl }: { slot: ImageSlot; existingUrl: string | nu
           <div className="py-5">
             <Upload size={18} className={`mx-auto mb-1 ${error ? "text-red-400" : "text-text-muted"}`} />
             <p className={`font-body text-[11px] ${error ? "text-red-400" : "text-text-muted"}`}>
-              {error ? "Falhou — clique para tentar de novo" : "Arraste ou clique"}
+              {error ? errorMsg || "Falhou — clique para tentar de novo" : "Arraste ou clique"}
             </p>
+            {!error && <p className="font-body text-[9px] text-text-muted/50 mt-0.5">JPG, PNG ou WebP</p>}
           </div>
         )}
       </label>
