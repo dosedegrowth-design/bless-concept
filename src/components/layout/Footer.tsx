@@ -1,7 +1,9 @@
 import Link from "next/link";
+import Image from "next/image";
 import { MessageCircle } from "lucide-react";
 import { Container } from "./Container";
 import { NAV_ITEMS, SERVICES, BUSINESS_INFO, getWhatsAppLink } from "@/lib/constants";
+import { img } from "@/lib/supabase";
 
 function InstagramIcon({ size = 20 }: { size?: number }) {
   return (
@@ -27,10 +29,15 @@ export function Footer() {
       <Container className="py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           <div className="lg:col-span-1">
-            <span className="font-display text-xl font-medium text-white">
-              Espaço Bless<br />
-              <span className="text-sm font-normal text-text-light">Concept</span>
-            </span>
+            <Link href="/">
+              <Image
+                src={img("images/logo/logo.png")}
+                alt="Espaço Bless Concept"
+                width={160}
+                height={56}
+                className="h-14 w-auto object-contain"
+              />
+            </Link>
             <p className="mt-4 font-body text-sm text-text-light leading-relaxed">
               {BUSINESS_INFO.tagline}
             </p>

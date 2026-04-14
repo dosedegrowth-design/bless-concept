@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useScrollProgress } from "@/hooks/useScrollProgress";
 import { NAV_ITEMS, SERVICES, getWhatsAppLink } from "@/lib/constants";
+import { img } from "@/lib/supabase";
 import { Container } from "./Container";
 
 export function Header() {
@@ -26,10 +28,13 @@ export function Header() {
         <Container className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center group">
-            <span className="font-display text-xl md:text-2xl font-medium text-white group-hover:text-gold-light transition-colors">
-              Espaço Bless<br />
-              <span className="text-sm font-normal text-text-light">Concept</span>
-            </span>
+            <Image
+              src={img("images/logo/logo.png")}
+              alt="Espaço Bless Concept"
+              width={140}
+              height={50}
+              className="h-10 md:h-12 w-auto object-contain group-hover:opacity-80 transition-opacity"
+            />
           </Link>
 
           {/* Desktop Nav */}
