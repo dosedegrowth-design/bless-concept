@@ -74,11 +74,56 @@ const SLOTS: ImageSlot[] = [
   { id: "logo", label: "Logo PNG", category: "Logo", path: "images/logo/logo.png", description: "Fundo transparente.", size: "1000x1000 mín", type: "image" },
 ];
 
-// Upload DIRETO do browser para o Supabase (igual HL Models)
+// Converte qualquer imagem (HEIC, JPEG, PNG, etc.) para WebP via Canvas
+async function convertToWebP(file: File, quality = 0.85): Promise<File> {
+  // Se já é WebP ou é vídeo, retorna sem converter
+  if (file.type === "image/webp" || file.type.startsWith("video/")) return file;
+
+  return new Promise((resolve, reject) => {
+    const img = document.createElement("img");
+    const url = URL.createObjectURL(file);
+
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+
+      const ctx = canvas.getContext("2d");
+      if (!ctx) { reject(new Error("Canvas context failed")); return; }
+
+      ctx.drawImage(img, 0, 0);
+      URL.revokeObjectURL(url);
+
+      canvas.toBlob(
+        (blob) => {
+          if (!blob) { reject(new Error("WebP conversion failed")); return; }
+          resolve(new File([blob], file.name.replace(/\.[^.]+$/, ".webp"), { type: "image/webp" }));
+        },
+        "image/webp",
+        quality
+      );
+    };
+
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      // Se o browser não suporta o formato (ex: HEIC no Chrome), retorna original
+      console.warn("Conversão falhou — enviando arquivo original:", file.type);
+      resolve(file);
+    };
+
+    img.src = url;
+  });
+}
+
+// Upload DIRETO do browser para o Supabase com conversão automática para WebP
 async function uploadToSupabase(file: File, path: string): Promise<string | null> {
-  const { error } = await supabase.storage.from(BUCKET).upload(path, file, {
+  // Converte para WebP se o slot espera .webp
+  const finalFile = path.endsWith(".webp") ? await convertToWebP(file) : file;
+  const contentType = path.endsWith(".webp") ? "image/webp" : finalFile.type;
+
+  const { error } = await supabase.storage.from(BUCKET).upload(path, finalFile, {
     upsert: true,
-    contentType: file.type,
+    contentType,
   });
 
   if (error) {
