@@ -1,0 +1,7 @@
+# Espaço Bless Concept - Salão de Beleza Premium
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+Sitemap: https://dashboardsupervisao.vercel.app/sitemap.xml

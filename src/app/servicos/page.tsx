@@ -11,9 +11,12 @@ import { SectionTitle } from "@/components/ui/SectionTitle";
 import { SERVICES, BRIDAL_SERVICE, getWhatsAppLink } from "@/lib/constants";
 
 export const metadata = {
-  title: "Serviços | Espaço Bless Concept",
+  title: "Serviços de Beleza e Estética — Salão Casa Verde SP",
   description:
-    "Conheça todos os serviços do Espaço Bless Concept: cabelos, depilação, estética facial e corporal, manicure, maquiagem, massagem e pacotes exclusivos para noivas.",
+    "Todos os serviços do Espaço Bless Concept na Casa Verde, Zona Norte de SP: corte e coloração de cabelos, depilação, estética facial e corporal, manicure e pedicure, maquiagem profissional, massagem relaxante e pacotes exclusivos para noivas. Agende pelo WhatsApp.",
+  alternates: {
+    canonical: "https://dashboardsupervisao.vercel.app/servicos",
+  },
 };
 
 export default function ServicosPage() {

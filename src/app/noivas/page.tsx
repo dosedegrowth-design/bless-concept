@@ -10,9 +10,16 @@ import { AnimateOnScroll } from "@/components/animation/AnimateOnScroll";
 import { getWhatsAppLink } from "@/lib/constants";
 
 export const metadata = {
-  title: "Experiência Noivas | Espaço Bless Concept",
+  title: "Dia da Noiva — Pacotes Exclusivos para Noivas em SP",
   description:
-    "Elegância, cuidado e sofisticação para o seu grande dia. Três experiências exclusivas inspiradas na realeza britânica: Kate Middleton, Lady Diana e Rainha Elizabeth.",
+    "Dia da noiva completo no Espaço Bless Concept, Casa Verde, Zona Norte de São Paulo. Três experiências exclusivas inspiradas na realeza: Kate Middleton, Lady Diana e Rainha Elizabeth. Cabelo, maquiagem, massagem e estética para o seu grande dia. Agende sua consultoria.",
+  alternates: {
+    canonical: "https://dashboardsupervisao.vercel.app/noivas",
+  },
+  openGraph: {
+    title: "Dia da Noiva | Espaço Bless Concept",
+    description: "Pacotes exclusivos para noivas inspirados na realeza britânica. Cabelo, maquiagem, massagem e estética.",
+  },
 };
 
 const EXPERIENCES = [

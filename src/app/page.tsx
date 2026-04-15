@@ -10,10 +10,23 @@ import { GallerySection } from "@/components/sections/GallerySection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { LocationSection } from "@/components/sections/LocationSection";
 import { CTASection } from "@/components/sections/CTASection";
+import { getLocalBusinessSchema, getWebsiteSchema, getFAQSchema } from "@/lib/structured-data";
 
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getLocalBusinessSchema()) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getWebsiteSchema()) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getFAQSchema()) }}
+      />
       <Header />
       <main>
         <Hero />

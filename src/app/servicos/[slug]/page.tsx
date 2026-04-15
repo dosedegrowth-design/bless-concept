@@ -7,6 +7,9 @@ import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFloat } from "@/components/ui/WhatsAppFloat";
 import { Container } from "@/components/layout/Container";
 import { getAllServices, getServiceBySlug, getWhatsAppServiceLink } from "@/lib/constants";
+import { getServiceSchema, getBreadcrumbSchema } from "@/lib/structured-data";
+
+const SITE_URL = "https://dashboardsupervisao.vercel.app";
 
 export function generateStaticParams() {
   return getAllServices().map((service) => ({
@@ -19,8 +22,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const service = getServiceBySlug(slug);
   if (!service) return { title: "Serviço não encontrado" };
   return {
-    title: `${service.title} | Espaço Bless Concept`,
-    description: service.description,
+    title: `${service.title} — Salão de Beleza Casa Verde SP`,
+    description: `${service.longDescription || service.description} Agende seu horário no Espaço Bless Concept, salão premium na Casa Verde, Zona Norte de São Paulo.`,
+    alternates: {
+      canonical: `${SITE_URL}/servicos/${service.slug}`,
+    },
+    openGraph: {
+      title: `${service.title} | Espaço Bless Concept`,
+      description: service.description,
+      url: `${SITE_URL}/servicos/${service.slug}`,
+      type: "website",
+    },
   };
 }
 
@@ -35,8 +47,22 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   const nextService = currentIndex < allServices.length - 1 ? allServices[currentIndex + 1] : null;
   const otherServices = allServices.filter((s) => s.slug !== slug).slice(0, 4);
 
+  const breadcrumbs = [
+    { name: "Início", url: SITE_URL },
+    { name: "Serviços", url: `${SITE_URL}/servicos` },
+    { name: service.title, url: `${SITE_URL}/servicos/${service.slug}` },
+  ];
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getServiceSchema(service)) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getBreadcrumbSchema(breadcrumbs)) }}
+      />
       <Header />
       <main>
         {/* Hero Banner */}
