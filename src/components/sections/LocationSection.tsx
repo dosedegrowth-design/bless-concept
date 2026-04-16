@@ -48,7 +48,7 @@ export function LocationSection() {
               <div className="flex items-center gap-4">
                 <Phone size={20} className="text-gold shrink-0" />
                 <a
-                  href={`tel:${BUSINESS_INFO.phone.replace(/\D/g, "")}`}
+                  href={`tel:+55${BUSINESS_INFO.phone.replace(/\D/g, "")}`}
                   className="font-body text-sm text-white hover:text-gold transition-colors"
                 >
                   {BUSINESS_INFO.phone}

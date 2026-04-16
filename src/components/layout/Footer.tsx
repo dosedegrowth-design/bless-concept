@@ -91,8 +91,16 @@ export function Footer() {
               <p>{BUSINESS_INFO.address}</p>
               <p>{BUSINESS_INFO.complement}</p>
               <p>{BUSINESS_INFO.city}</p>
-              <p className="mt-4">{BUSINESS_INFO.phone}</p>
-              <p>{BUSINESS_INFO.email}</p>
+              <p className="mt-4">
+                <a href={`tel:+55${BUSINESS_INFO.phone.replace(/\D/g, "")}`} className="hover:text-white transition-colors">
+                  {BUSINESS_INFO.phone}
+                </a>
+              </p>
+              <p>
+                <a href={`mailto:${BUSINESS_INFO.email}`} className="hover:text-white transition-colors">
+                  {BUSINESS_INFO.email}
+                </a>
+              </p>
               <div className="mt-4 pt-4 border-t border-white/5">
                 <p className="text-text-muted text-xs">Seg-Sáb: {BUSINESS_INFO.hours.weekdays}</p>
                 <p className="text-text-muted text-xs">Dom: {BUSINESS_INFO.hours.sunday}</p>

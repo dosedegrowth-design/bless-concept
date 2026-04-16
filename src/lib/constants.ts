@@ -297,7 +297,7 @@ export const BUSINESS_INFO = {
     facebook: "https://facebook.com/espacoblessconcept",
   },
   mapsEmbed:
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3658.1!2d-46.65!3d-23.51!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDMwJzM2LjAiUyA0NsKwMzknMDAuMCJX!5e0!3m2!1spt-BR!2sbr",
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d913.5!2d-46.6637!3d-23.5060!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cef7e5c6d5f26b%3A0x376a6771e50f3423!2sAv.+Casa+Verde%2C+162+-+Casa+Verde%2C+S%C3%A3o+Paulo+-+SP!5e0!3m2!1spt-BR!2sbr",
 } as const;
 
 export const MARQUEE_ITEMS = [
