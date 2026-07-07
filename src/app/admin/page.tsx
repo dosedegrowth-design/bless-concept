@@ -1,8 +1,81 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Upload, Check, Image as ImageIcon, Film, Loader2, RefreshCw } from "lucide-react";
+import { Upload, Check, Image as ImageIcon, Film, Loader2, RefreshCw, Lock, Eye, EyeOff } from "lucide-react";
 import { supabase, BUCKET } from "@/lib/supabase";
+
+const ADMIN_PASS = "bless2026";
+const SESSION_KEY = "bless-admin-auth";
+
+function LoginGate({ onAuth }: { onAuth: () => void }) {
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
+  const [show, setShow] = useState(false);
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (password === ADMIN_PASS) {
+      sessionStorage.setItem(SESSION_KEY, "1");
+      onAuth();
+    } else {
+      setError(true);
+      setTimeout(() => setError(false), 2000);
+    }
+  }
+
+  return (
+    <div className="min-h-screen bg-black flex items-center justify-center px-4">
+      <form onSubmit={handleSubmit} className="w-full max-w-sm">
+        <div className="bg-charcoal border border-white/10 rounded-2xl p-8 text-center">
+          <div className="w-14 h-14 rounded-full bg-gold/10 flex items-center justify-center mx-auto mb-5">
+            <Lock size={24} className="text-gold" />
+          </div>
+          <h1 className="font-display text-xl font-medium text-white mb-1">Painel de Imagens</h1>
+          <p className="font-body text-sm text-text-muted mb-6">Digite a senha para acessar</p>
+
+          <div className="relative mb-4">
+            <input
+              type={show ? "text" : "password"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Senha"
+              autoFocus
+              className={`w-full bg-black/50 border rounded-xl px-4 py-3 pr-12 font-body text-sm text-white placeholder:text-text-muted/50 outline-none transition-colors ${error ? "border-red-500/60 shake" : "border-white/10 focus:border-gold/40"}`}
+            />
+            <button
+              type="button"
+              onClick={() => setShow(!show)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-white transition-colors"
+            >
+              {show ? <EyeOff size={16} /> : <Eye size={16} />}
+            </button>
+          </div>
+
+          {error && (
+            <p className="font-body text-xs text-red-400 mb-3">Senha incorreta</p>
+          )}
+
+          <button
+            type="submit"
+            className="w-full bg-gold hover:bg-gold-light text-black font-body text-sm font-medium py-3 rounded-xl transition-colors"
+          >
+            Entrar
+          </button>
+        </div>
+        <p className="font-body text-[10px] text-text-muted/30 text-center mt-4">Espaço Bless Concept — Painel Administrativo</p>
+      </form>
+
+      <style jsx>{`
+        @keyframes shake {
+          0%, 100% { transform: translateX(0); }
+          20%, 60% { transform: translateX(-6px); }
+          40%, 80% { transform: translateX(6px); }
+        }
+        .shake { animation: shake 0.4s ease-in-out; }
+      `}</style>
+    </div>
+  );
+}
 
 interface ImageSlot {
   id: string;
@@ -192,6 +265,18 @@ function Slot({ slot, existingUrl }: { slot: ImageSlot; existingUrl: string | nu
 }
 
 export default function AdminPage() {
+  const [authed, setAuthed] = useState(false);
+
+  useEffect(() => {
+    if (sessionStorage.getItem(SESSION_KEY) === "1") setAuthed(true);
+  }, []);
+
+  if (!authed) return <LoginGate onAuth={() => setAuthed(true)} />;
+
+  return <AdminPanel />;
+}
+
+function AdminPanel() {
   const categories = [...new Set(SLOTS.map((s) => s.category))];
   const [existingUrls, setExistingUrls] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
